@@ -1,0 +1,22 @@
+GAS LISTING test.s 			page 1
+
+
+   1                       	section .data
+   2                       	    hello db 'Hello, world!', 0Ah ; string to print, 0Ah is the newline character
+   3                       	    len equ $-hello ; length of the string
+   4                       	
+   5                       	section .text
+   6                       	    global _start
+   7                       	
+   8                       	_start:
+   9                       	    ; write the string to stdout
+  10                       	    mov eax, 4 ; system call for write
+  11                       	    mov ebx, 1 ; file descriptor for stdout
+  12                       	    mov ecx, hello ; address of the string
+  13                       	    mov edx, len ; number of bytes to write
+  14                       	    int 80h ; invoke the kernel to perform the system call
+  15                       	
+  16                       	    ; exit with success
+  17                       	    mov eax, 1 ; system call for exit
+  18                       	    xor ebx, ebx ; return code of 0 for success
+  19                       	    int 80h ; invoke the kernel to perform the system call...
