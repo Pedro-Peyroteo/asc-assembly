@@ -1,0 +1,21 @@
+3) 
+main:
+    movl $0xFFFF, %eax
+    stc
+L0: adcl $0x7FFFFFFF, %eax  # using signed arithmetic
+L1: cli
+L2: into                    # interrupt if overflow
+    ret
+
+a) [OF] - Overflow Flag, porque: Em L2 é chamada a interrupção do sistema no caso de Overflow, assim 
+          pondo a Flag de Overflow (OF) para 1.
+
+b)
+
+c)
+
+
+(Existe também a instrução into (INTerrupt if Overflow) que, em dependência do estado da flag de
+overflow (OF), pode efectuar uma chamada da rotina de tratamento de overflow (int $4). Se a flag
+estiver activa (OF=1) então corresponde a executar int $4, senão não é gerada nenhuma
+interrupção.)

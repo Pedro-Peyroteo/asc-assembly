@@ -7,9 +7,12 @@ VAR2:   .long -3           # Segundo valor (divisor)
     .globl main
 main:
     # Poe VAR1 no registo %eax 
-    movl VAR1, %eax 
+    #movl VAR1, %eax 
     # Poe VAR2 no registo %ebx
-    movl VAR2, %ebx 
+    #movl VAR2, %ebx 
+
+    pushl VAR1
+    pushl VAR2
 
     # Chama a função media
     call media
