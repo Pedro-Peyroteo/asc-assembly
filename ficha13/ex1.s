@@ -6,6 +6,12 @@
     .global main
 
 main:
+    pushl $2               # Número de strings (2 no exemplo)
+    leal array, %ebx       # Endereço do array de strings
+    pushl %ebx
+    call func1             # Chama func1
+    addl $8, %esp          # Ajusta a pilha
+    ret
     
 func1:
     pushl   %ebp

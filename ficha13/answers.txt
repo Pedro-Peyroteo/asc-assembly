@@ -1,0 +1,21 @@
+a)  O programa imprime um conjunto de strings armazenadas em memória, separadas por espaços, e termina com uma nova linha.
+    Função func1: Recebe dois parâmetros:
+
+    Um contador (%eax) indicando o número de elementos para processar.
+    Um ponteiro para um array (%ebx).
+
+    O ciclo percorre o array e, para cada elemento, a função prtstr imprime o conteúdo (assumido como strings terminadas em nulo).
+
+    Função prtstr:
+
+        Imprime uma string terminada em nulo (\0) referenciada por %ecx.
+        Adiciona um espaço após cada string.
+
+d) O código de erro geralmente é 0 para execução bem-sucedida. 
+
+Criar ficheiros .o: 
+    gcc --32 -o func1.o func1.s
+    gcc --32 -o prtstr.o prtstr.s
+    gcc --32 -o main.o main.s
+Link:
+    gcc -m32 -no-pie -o program main.o func1.o prtstr.o

@@ -1,0 +1,71 @@
+Exercício 1
+
+  b)
+
+    O programa multiplica cada elemento do vetor origem pela constante 2048 e armazena o resultado no vetor destino. Depois, imprime os valores do vetor destino.
+
+  c)
+
+    Declarações das variáveis:
+        origem: Alocada na seção .data, pois contém valores inicializados.
+        destino: Alocada na seção .bss, pois contém valores não inicializados.
+
+  d)
+
+    Tradução da função calcula_enuplo:
+        Prólogo: Configuração da pilha, salvando o valor do %ebp.
+        Corpo: Multiplicação do parâmetro pela constante e armazenamento do resultado.
+        Epílogo: Restauro de %ebp e retorno.
+
+  e)
+
+    Transferência de parâmetros e resultados:
+        Parâmetros: Usados via pilha (armazenados antes da chamada da função).
+        Resultados: Retornados em %eax.
+
+  f)
+
+    Código em Assembly para multiplica_vetor:
+        Parâmetros para calcula_enuplo são passados via pilha.
+        O resultado da função é armazenado no vetor destino.
+
+Exercício 2
+  a)
+
+    Utilize o depurador ddd e configure um observador para o endereço de topo da pilha (%esp), ajustando os seguintes parâmetros:
+        Número de elementos: 1.
+        Base de numeração: Hexadecimal.
+        Dimensão: 4 bytes.
+        Endereço: %esp.
+
+  b)
+
+    Para observar os resultados, adicione um observador no endereço do vetor destino.
+
+  c)
+
+    Pontos de paragem recomendados:
+        No início da função calcula_enuplo.
+        Na instrução de retorno (ret) da função.
+
+Exercício 3
+  a)
+
+    Preencher o cabeçalho da função enuplo_asm:
+        Entrada: Valor na pilha.
+        Saída: Resultado armazenado em %eax.
+        Destrói: %eax, %ebp.
+
+  b)
+
+    Interface e funcionalidade: Sim, ambas as funções possuem a mesma interface e funcionalidade, calculando o enuplo de um valor.
+
+  c)
+
+    Multiplicação por 2048:
+        calcula_enuplo: Multiplica diretamente pelo valor.
+        enuplo_asm: Usa o deslocamento lógico (sall) para multiplicar por 2^11.
+
+  d)
+
+    Overflow na instrução sall: Sim, pode ocorrer overflow se o resultado exceder o tamanho do registo. Isso pode ser detectado pela flag OF no registo de flags.
