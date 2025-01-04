@@ -1,0 +1,18 @@
+2) a) A diferença principal está na inicialização da variável acumulador. 
+      No programa escrito em Assembly, a variável é inicializada explicitamente, enquanto no programa escrito em C pode
+      conter lixo na memória se não inicializada. Para alinhar os resultados, seria necessário inicializar o acumulador a 0:
+      "int acumulador = 0, i;"
+
+    b/c) O código Assembly gerado pelo compilador encontra-se mais otimizado e com formatação diferente.
+
+3) a) Valores finais dos registos:
+      - EAX: Contém o valor final da variavel acumulador.
+      - EBX, ECX, EDX: Indeterminado.
+    
+    b) Na 3ª iteração do ciclo:
+       - ZF: 0 (comparação não resulta em igualdade).
+       - CF, SF, OF: Verificar na execução, mas esperados como 0, 0, 0 (dependem da comparação).
+       R: As Flags (ZF, CF, SF, OF) refletem o resultado da operação de comparação. 
+
+    c) O ciclo é executado 11 vezes. 
+       O salto é controlado pela instrução "cmp" e "jge", que verifica se a variável de controlo atingiu o limite.
