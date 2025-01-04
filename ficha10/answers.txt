@@ -1,0 +1,111 @@
+1) 
+    1) movl $900, %eax
+
+        Válida
+        Atribui o valor literal 900 ao registo %eax.
+
+    2) movl 900, %eax
+
+        Inválida
+        O valor 900 seria interpretado como um endereço de memória direto, e não como um literal.
+
+    3) movl Z, %eax
+
+        Válida
+        Copia o valor da célula de memória Z para %eax.
+
+    4) movl $Z, %ebx; movl (%ebx), %eax
+
+        Válida
+        %ebx contém o endereço de Z, e a segunda instrução copia o valor armazenado nesse endereço para %eax.
+
+    5) movl (%ebx), X
+
+        Inválida
+        Não é possível usar um endereço como fonte e destino diretamente.
+
+    6) movl $4, %ebx; movl (%ebx), %edx
+
+        Inválida
+        %ebx contém o valor 4, que não é um endereço válido.
+
+    6) movl Z+4, %edx
+
+        Válida
+        Copia o valor da célula de memória no endereço Z+4 para %edx.
+
+    7) leal Z+6, %ebx; movl 6(%ebx), %edx
+
+        Inválida
+        %ebx conterá o endereço Z+6. No entanto, a soma 6(%ebx) é inválida.
+
+    8) movl $Z+8, %ebx; movl 4(%ebx), %edx
+
+        Válida
+        %ebx contém o endereço Z+8, e 4(%ebx) acessa a célula correta.
+
+    9) movl $1, %ecx; movl Z(,%ecx,4), %eax
+
+        Válida
+        Usa o modo de endereçamento indexado para acessar o valor correto.
+
+    10) movl $3, %ecx; movl Z(,%ecx,4), %eax
+
+        Válida
+        Acessa a célula correspondente com índice 3.
+
+    11) movl $4, %ebx; movl $4, %esi; movl X+6(%ebx,%esi,4), %eax
+
+        Válida
+        Acessa a célula usando endereçamento relativo e indexado.
+2) b) movl INIT(,%ecx,4), %eax
+
+3) movl $7, %ecx; movl vetorLongs(,%ecx,4), %edx
+
+4)  movl $0, %edx
+    movl $1, %ecx
+    soma_ciclo:
+    addw vetorWords(,%ecx,2), %edx
+    addl $2, %ecx
+    cmpl $30, %ecx
+    jne soma_ciclo
+
+5) 
+movl $16, %ecx
+movl $0, %edx
+soma_metade:
+addw vetorWords(,%ecx,2), %edx
+addl $2, %ecx
+cmpl $30, %ecx
+jne soma_metade
+
+6) 
+pushl A
+pushl B
+popl A
+popl B
+
+7) 
+movl $0, %ecx
+copiar_ciclo:
+movw ORIGEM(,%ecx,2), %ax
+movw %ax, DESTINO(,%ecx,2)
+addl $1, %ecx
+cmpl $8, %ecx
+jne copiar_ciclo
+
+8) "movw $0, %ax; rorl $16, %eax". Isto garante que %eax volte para 0.
+
+9) 
+    %eax: 2 (valor copiado de ac+4).
+    %ebx: 11 (%edx = 5 incrementado em 6).
+    %ecx: Endereço de cgs.
+    %edx: 5.
+
+    Conteúdo da pilha antes das instruções pop:
+
+        Topo contém os valores empurrados para a pilha: %edx = 5.
+
+    Conteúdo da pilha antes de ret:
+
+        O endereço de retorno está no topo.
